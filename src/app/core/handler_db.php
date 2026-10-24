@@ -10,31 +10,36 @@ function do_register(PDO $db, string $username, string $email, string $password)
         ':password' => $hashedPassword
     ]);
 
-    if ($stmt->rowCount() > 0) {
-        return True;
-    } else {
-        return False;
+    if ($stmt->rowCount() === 0) {
+        return false;
     }
+
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        session_regenerate_id(true);
+    }
+    $_SESSION["username"] = $username;
+
+    return true;
 }
 
 
-function do_login(PDO $db, string $email, string $password): string {
-    $statement = $db->prepare("SELECT email, password FROM users WHERE email = :email");
+function do_login(PDO $db, string $email, string $password): bool {
+    $statement = $db->prepare("SELECT username, password FROM users WHERE email = :email");
     $statement->execute([
         ':email' => $email
     ]);
     
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-    if ($user) {
-        if (password_verify($password, $user['password'])) {
-            $_SESSION["username"] = $user["username"];
-            return True;
-        } else {
-            return False;
-        }
-    } else {
-        return False;
+    if (!$user || !password_verify($password, $user['password'])) {
+        return false;
     }
+
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        session_regenerate_id(true);
+    }
+    $_SESSION["username"] = $user["username"];
+
+    return true;
 }
 ?>
