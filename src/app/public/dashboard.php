@@ -13,18 +13,32 @@ if (!isset($_SESSION["username"])) {
     exit;
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f2f5f0">
+    <title>Dashboard | Simple Login</title>
+    <link rel="stylesheet" href="/app.css">
 </head>
-<body>
-    <h1>Welcome back! <?= htmlspecialchars($_SESSION["username"], ENT_QUOTES, 'UTF-8') ?>!</h1>
-    <form method="POST">
-        <button type="submit" name="logout" value="1">Keluar</button>
-    </form>
+<body class="dashboard-page">
+    <main class="dashboard-shell">
+        <header class="dashboard-header">
+            <a class="brand" href="/dashboard.php">
+                <span class="brand-mark" aria-hidden="true">S</span>
+                <span>Simple Login</span>
+            </a>
+            <form method="POST">
+                <button class="button button--secondary" type="submit" name="logout" value="1">Keluar</button>
+            </form>
+        </header>
+        <section class="dashboard-content" aria-labelledby="dashboard-title">
+            <p class="eyebrow">RUANG AKUN</p>
+            <h1 id="dashboard-title">Selamat datang, <?= htmlspecialchars($_SESSION["username"], ENT_QUOTES, 'UTF-8') ?>.</h1>
+            <p>Kamu berhasil masuk.</p>
+        </section>
+    </main>
 </body>
 </html>
 

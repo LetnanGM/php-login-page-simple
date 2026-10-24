@@ -30,36 +30,61 @@ try {
 }
 ?>
 
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f2f5f0">
+    <title>Daftar | Simple Login</title>
+    <link rel="stylesheet" href="/app.css">
 </head>
 <body>
-    <h1>Buat akun</h1>
-    <?php if ($error !== null): ?>
-        <div role="alert">
-            <p><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
-            <?php if ($debugError !== null): ?>
-                <details>
-                    <summary>Detail debugging</summary>
-                    <pre><?= htmlspecialchars($debugError, ENT_QUOTES, 'UTF-8') ?></pre>
-                </details>
+    <main class="auth-layout">
+        <section class="auth-intro" aria-labelledby="intro-title">
+            <a class="brand" href="/index.php">
+                <span class="brand-mark" aria-hidden="true">S</span>
+                <span>Simple Login</span>
+            </a>
+            <p class="eyebrow">AKUN / AKSES</p>
+            <h1 id="intro-title">Mulai dengan akunmu.</h1>
+            <p class="intro-copy">Buat akun untuk masuk ke ruang pribadimu.</p>
+        </section>
+        <section class="auth-panel" aria-labelledby="form-title">
+            <header class="panel-heading">
+                <p class="eyebrow">BUAT AKUN</p>
+                <h2 id="form-title">Daftar ke Simple Login</h2>
+                <p>Isi detail berikut untuk memulai.</p>
+            </header>
+            <?php if ($error !== null): ?>
+                <div class="form-error" role="alert" aria-live="polite">
+                    <p><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
+                    <?php if ($debugError !== null): ?>
+                        <details>
+                            <summary>Detail debugging</summary>
+                            <pre><?= htmlspecialchars($debugError, ENT_QUOTES, 'UTF-8') ?></pre>
+                        </details>
+                    <?php endif; ?>
+                </div>
             <?php endif; ?>
-        </div>
-    <?php endif; ?>
-    <form method="POST">
-        <label for="username">Username : </label>
-        <input id="username" type="text" name="username" placeholder="Masukkan Username" value="<?= htmlspecialchars($_POST["username"] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
-        <label for="email">Email : </label>
-        <input id="email" type="email" name="email" placeholder="Masukkan Email" value="<?= htmlspecialchars($_POST["email"] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
-        <label for="password">Password : </label>
-        <input id="password" type="password" name="password" placeholder="Minimal 8 karakter" minlength="8" required>
-        
-        <button type="submit">Buat akun</button>
-    </form>
-    <p>Sudah punya akun? <a href="/index.php">Masuk</a></p>
+            <form method="POST">
+                <div class="form-field">
+                    <label for="username">Nama pengguna</label>
+                    <input id="username" type="text" name="username" autocomplete="username" placeholder="Nama pengguna" value="<?= htmlspecialchars($_POST["username"] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
+                </div>
+                <div class="form-field">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" autocomplete="email" placeholder="nama@contoh.com" value="<?= htmlspecialchars($_POST["email"] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
+                </div>
+                <div class="form-field">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" name="password" autocomplete="new-password" minlength="8" placeholder="Minimal 8 karakter" required>
+                </div>
+                <button class="button button--full" type="submit">Buat akun</button>
+            </form>
+            <p class="form-footer">Sudah punya akun? <a href="/index.php">Masuk</a></p>
+        </section>
+    </main>
 </body>
 </html>
