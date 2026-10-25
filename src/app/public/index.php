@@ -17,7 +17,7 @@ try {
         if ($email === '' || $password === '') {
             $error = "Email dan password wajib diisi.";
         } elseif (do_login($db, $email, $password)) {
-            header("Location: /dashboard.php", true, 302);
+            header("Location: /dashboard/dashboard.php", true, 302);
             exit;
         } else {
             $error = "Email atau password tidak cocok.";
@@ -79,6 +79,7 @@ try {
                 </div>
                 <button class="button button--full" type="submit">Masuk</button>
             </form>
+            <p class="form-footer"><a href="/forgot.php">Lupa password?</a></p>
             <p class="form-footer">Belum punya akun? <a href="/register.php">Daftar</a></p>
         </section>
     </main>

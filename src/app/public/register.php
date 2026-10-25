@@ -20,7 +20,7 @@ try {
         } elseif (strlen($password) < 8) {
             $error = "Password harus memiliki minimal 8 karakter.";
         } elseif (do_register($db, $username, $email, $password)) {
-            header("Location: /dashboard.php", true, 302);
+            header("Location: /dashboard/dashboard.php", true, 302);
             exit;
         } else {
             $error = "Email tersebut sudah terdaftar. Silakan masuk.";

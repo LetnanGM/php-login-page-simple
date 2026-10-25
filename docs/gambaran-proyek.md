@@ -18,7 +18,9 @@ Alurnya seperti ini:
 
 - **PHP** mengatur halaman, form, dan proses login.
 - **HTML** membentuk isi halaman dan form.
-- **CSS** mengatur tampilan.
+- **Bootstrap** membantu mengatur tata letak dan komponen dashboard.
+- **HTMX** memuat konten fitur dashboard tanpa memuat ulang seluruh halaman.
+- **CSS** mengatur detail tampilan yang khusus untuk proyek ini.
 - **SQLite** menyimpan akun di sebuah file database.
 - **PDO** menjadi cara PHP berbicara dengan database.
 - **Session** mengingat pengguna yang sudah masuk.
@@ -29,6 +31,9 @@ Alurnya seperti ini:
 - Aplikasi menyimpan password dalam bentuk hash, bukan teks biasa.
 - Pengguna bisa masuk menggunakan email dan password.
 - Dashboard hanya bisa dibuka oleh pengguna yang sudah masuk.
+- Dashboard memiliki menu Beranda dan Profil yang kontennya dapat dimuat tanpa memuat ulang halaman.
+- Pengguna yang sudah masuk dapat membuat tautan ringkas dengan alias otomatis atau alias khusus.
+- Form lupa password menyimpan permintaan di mailbox dashboard admin; pengiriman SMTP dan penggantian password belum tersedia.
 - Tombol keluar menghapus session login.
 - Aplikasi memeriksa token CSRF saat form login, daftar, atau keluar dikirim.
 - Aplikasi menolak metode request yang tidak diizinkan.
