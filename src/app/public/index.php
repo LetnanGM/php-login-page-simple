@@ -1,11 +1,14 @@
 <?php
+require_once __DIR__ . "/../core/handler_request.php";
 session_start();
+require_once __DIR__ . "/../core/handler_csrf.php";
+only_access_with_and(["POST", "GET"], true);
 $error = null;
 $debugError = null;
 
 try {
     require_once __DIR__ . "/../config/koneksi.php";
-    require_once __DIR__ . "/../core/handler_db.php";
+    require_once __DIR__ . "/../core/handler_auth.php";
 
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $email = trim($_POST["email"] ?? '');
@@ -65,6 +68,7 @@ try {
                 </div>
             <?php endif; ?>
             <form method="POST">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(create_csrf_token(), ENT_QUOTES, 'UTF-8') ?>">
                 <div class="form-field">
                     <label for="email">Email</label>
                     <input id="email" type="email" name="email" autocomplete="email" placeholder="nama@contoh.com" value="<?= htmlspecialchars($_POST["email"] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>

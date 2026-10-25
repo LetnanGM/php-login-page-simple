@@ -1,5 +1,8 @@
 <?php
+require_once __DIR__ . "/../core/handler_request.php";
 session_start();
+require_once __DIR__ . "/../core/handler_csrf.php";
+only_access_with_and(["GET", "POST"], true);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["logout"])) {
     $_SESSION = [];
@@ -30,6 +33,7 @@ if (!isset($_SESSION["username"])) {
                 <span>Simple Login</span>
             </a>
             <form method="POST">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(create_csrf_token(), ENT_QUOTES, 'UTF-8') ?>">
                 <button class="button button--secondary" type="submit" name="logout" value="1">Keluar</button>
             </form>
         </header>
@@ -41,4 +45,3 @@ if (!isset($_SESSION["username"])) {
     </main>
 </body>
 </html>
-
